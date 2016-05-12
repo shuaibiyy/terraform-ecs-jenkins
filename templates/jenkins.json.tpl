@@ -18,7 +18,7 @@
     "mountPoints": [
       {
         "sourceVolume": "jenkins-home",
-        "containerPath": "/data"
+        "containerPath": "/var/jenkins_home"
       }
     ]
   },

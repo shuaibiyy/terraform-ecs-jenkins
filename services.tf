@@ -11,6 +11,14 @@ resource "aws_elb" "jenkins-elb" {
     instance_port = 8080
   }
 
+  listener {
+    lb_protocol = "tcp"
+    lb_port = 50000
+
+    instance_protocol = "tcp"
+    instance_port = 50000
+  }
+
   /* @todo - handle SSL */
   /*listener {
     instance_port = 5000
