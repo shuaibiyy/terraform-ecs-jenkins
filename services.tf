@@ -43,8 +43,8 @@ resource "template_file" "jenkins_task_template" {
   template = "${file("templates/jenkins.json.tpl")}"
 
   vars {
-    aws_access_key = "${var.aws_access_key}"
-    aws_secret_key = "${var.aws_secret_key}"
+    aws_access_key = "${var.access_key}"
+    aws_secret_key = "${var.secret_key}"
     s3_bucket = "${aws_s3_bucket.jenkins_data.id}"
     jenkins_repository_url = "${var.jenkins_repository_url}"
   }

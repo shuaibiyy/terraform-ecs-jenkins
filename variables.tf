@@ -1,8 +1,8 @@
-variable "aws_access_key" {
+variable "access_key" {
   description = "The AWS access key."
 }
 
-variable "aws_secret_key" {
+variable "secret_key" {
   description = "The AWS secret key."
 }
 
