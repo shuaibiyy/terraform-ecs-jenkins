@@ -129,7 +129,7 @@ resource "aws_autoscaling_group" "asg_jenkins" {
   }
 }
 
-resource "template_file" "user_data" {
+data "template_file" "user_data" {
   template = "${file("templates/user_data.tpl")}"
 
   vars {
@@ -138,10 +138,6 @@ resource "template_file" "user_data" {
     s3_bucket = "${var.s3_bucket}"
     ecs_cluster_name = "${var.ecs_cluster_name}"
     restore_backup = "${var.restore_backup}"
-  }
-
-  lifecycle {
-    create_before_destroy = true
   }
 }
 
@@ -153,7 +149,7 @@ resource "aws_launch_configuration" "lc_jenkins" {
   iam_instance_profile = "${aws_iam_instance_profile.iam_instance_profile.name}"
   key_name = "${var.key_name}"
   associate_public_ip_address = true
-  user_data = "${template_file.user_data.rendered}"
+  user_data = "${data.template_file.user_data.rendered}"
 
   lifecycle {
     create_before_destroy = true
@@ -174,5 +170,5 @@ resource "aws_iam_role_policy" "instance_role_policy_jenkins" {
 resource "aws_iam_instance_profile" "iam_instance_profile" {
   name = "iam_instance_profile_${var.ecs_cluster_name}"
   path = "/"
-  roles = ["${aws_iam_role.host_role_jenkins.name}"]
+  role = "${aws_iam_role.host_role_jenkins.name}"
 }

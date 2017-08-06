@@ -1,10 +1,10 @@
-resource "template_file" "jenkins_task_template" {
+data "template_file" "jenkins_task_template" {
   template = "${file("templates/jenkins.json.tpl")}"
 }
 
 resource "aws_ecs_task_definition" "jenkins" {
   family = "jenkins"
-  container_definitions = "${template_file.jenkins_task_template.rendered}"
+  container_definitions = "${data.template_file.jenkins_task_template.rendered}"
 
   volume {
     name = "jenkins-home"
