@@ -6,7 +6,7 @@ echo ECS_CLUSTER='${ecs_cluster_name}' > /etc/ecs/ecs.config
 jenkins_host_dir=/ecs/jenkins-home
 mkdir -p $jenkins_host_dir
 chmod -R 777 $jenkins_host_dir
-h
+
 if ${restore_backup}
 then
     docker run \
