@@ -4,7 +4,7 @@ provider "aws" {
   region = "${var.region}"
 }
 
-resource "terraform_remote_state" "tfstate" {
+data "terraform_remote_state" "tfstate" {
   backend = "s3"
   config {
     bucket = "mycompany-terraform"
